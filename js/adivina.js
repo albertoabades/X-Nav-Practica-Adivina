@@ -31,6 +31,12 @@ $(document).ready(function(){
 	function startGame(){
 		$.getJSON("juegos/Capitales.json", function(datos){
 			console.log("SSSSSSS");
+			var place = datos.features[Math.floor(Math.random()*datos.features.length)];
+	        var placecoords=place.geometry.coordinates;
+	        var placetag=place.properties.Name;
+	        $("#correctCoords").val(placecoords);
+	        //showPics(placetag,placecoords);
+	        //drawMap();
 		});
 	}
 
