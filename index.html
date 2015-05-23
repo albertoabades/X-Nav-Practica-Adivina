@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/adivina.css" type="text/css" rel="stylesheet" title="style"/>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+		<title>Adivina dónde está</title>
+	</head>
+	<body>
+		<div id="game" class="container">
+			<div class="row" id="juego">
+				<div class="col-md-3">
+					<p>
+						<button class="btn btn-default" type="button" id="startGame">Start Game</button>
+					</p>
+					<p>
+   						<button class="btn btn-primary" type="button">Primary</button>
+   					</p>
+   					<p>
+   						<button class="btn btn-success" type="button">Success</button>
+   					</p>
+   					<p>
+    					<button class="btn btn-info" type="button">Info</button>
+    				</p>
+    				<p>
+    					<button class="btn btn-warning" type="button">Warning</button>
+    				</p>
+    				<p>
+    					<button class="btn btn-danger" type="button">Danger</button>
+    				</p>
+				</div>
+				<div class="col-md-6">
+					fotos
+				</div>
+				<div class="col-md-3">
+					<form>
+						Select coords:
+						<input type="text" id="selectCoords" value="">
+					</form>
+					<form>
+						Correct coords:
+						<input type="text" id="correctCoords" value="">
+					</form>
+					<form>
+						Distance:
+						<input type="text" id="distance" value="">
+					</form>
+					<form>
+						Photos:
+						<input type="text" id="photos" value="">
+					</form>
+					<form>
+						Points:
+						<input type="text" id="points" value="">
+					</form>
+					<form>
+						Name:
+						<input type="text" id="name" value="">
+					</form>
+				</div>
+			</div>
+			<div class ="row" id="mapa"></div>
+		</div>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/adivina.js"></script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+</html>
