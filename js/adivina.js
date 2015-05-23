@@ -1,76 +1,86 @@
 var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-
+var map;
+var placecoords;
+var myVar;
+var numPhotos;
 
 $(document).ready(function(){ 
 	$("#selectCoords").val("");
+	$("#correctCoords").val("");
+	$("#name").val("");
+	$("#distance").val("");
+	$("#photos").val("");
 
-    var map = L.map('mapa').setView([40.2838, -3.8215], 2);
-    // add an OpenStreetMap tile layer
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	map = L.map('mapa').setView([40.2838, -3.8215], 2);
+	// add an OpenStreetMap tile layer
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+	}).addTo(map);
 
- 	//var popup = L.popup();
-	//function onMapClick(e) {
-    //	popup
-    //    .setLatLng(e.latlng)
-    //    .setContent("You clicked the map at " + e.latlng.toString())
-    //    .openOn(map);
-	//}
-	//map.on('click', onMapClick);
-
-	function onMapClick2(e) {
+	var popup = L.popup();
+	var popup2 = L.popup();
+	function onMapClick(e) {
 		var marker = "";
 		var lat = e.latlng.toString();
 		var coords = lat.substring(6);
 		var marker = L.marker(e.latlng).addTo(map);
 		$("#selectCoords").val(coords);
+		var dist=e.latlng.distanceTo(L.latLng(placecoords[0], placecoords[1]))/1000;
+		$("#distance").val(dist.toFixed(3));
+		$("#correctCoords").val("("+placecoords+")");
+	    $("#name").val(placetag);
+	    var marker = L.marker(L.latLng(placecoords[0], placecoords[1])).addTo(map);
+	    clearTimeout(myVar);
 	}
-	map.on('click', onMapClick2);
+	//map.on('click', onMapClick);
 
 	function startGame(){
+		numPhotos = 0;
 		$.getJSON("juegos/Capitales.json", function(datos){
-			console.log("SSSSSSS");
 			var place = datos.features[Math.floor(Math.random()*datos.features.length)];
-	        var placecoords=place.geometry.coordinates;
-	        var placetag=place.properties.Name;
-	        $("#correctCoords").val(placecoords);
-	        //showPics(placetag,placecoords);
-	        //drawMap();
+	        placecoords=place.geometry.coordinates;
+	        placetag=place.properties.Name;
+	        showPics(placetag);
+	        map.on('click', onMapClick);
 		});
 	}
 
     $("#startGame").click(function(){
-    	console.log("!!!!!!");
         startGame();
-        console.log("ªªªªªªªªªªª");
     });
 
+    $("#stopGame").click(function(){
+    	clearTimeout(myVar);
+    });
 
-	/*
-	function showPics(tag,coords){
-		$.getJSON(flickerAPI,{
-			tags:tag,
+    $("#abortGame").click(function(){
+    	$("#selectCoords").val("");
+		$("#correctCoords").val("");
+		$("#name").val("");
+		$("#distance").val("");
+		$("#photos").val("");
+    	clearTimeout(myVar);
+    	document.getElementById("fotos").innerHTML = "";
+    });
+
+    function showPics(placetag){
+    	i=0;
+    	$.getJSON(flickerAPI,{
+			tags:placetag,
 			tagmode:"any",
 			format:"json"
-		})
-		.done(function(data){
-	        data = data.items.splice(0,10);
-	        for(i=0; i<10 ; i++){
-	            var html;
-	            if(i===0){
-	                html='<div class="item active">'
-	                    html+='<img id="carousel0" src="'+data[i].media.m+'"width="100%" "height="360px">'
-	                html+='</div>'
-	            }else{
-	                html='<div class="item">'
-	                    html+='<img id="carousel'+i+'" src="'+data[i].media.m+'"width="100%" "height="360px">'
-	                html+='</div>'
-	            }
-	            $(".carousel-inner").append(html);
-	        } 
-	    });
-	}
-	*/
+		}).done(function(data){
+			data = data.items.splice(0,20);
+			myVar = setInterval(function () {myTimer()}, 1000);
+			function myTimer() {
+				document.getElementById("fotos").innerHTML = "";
+				html = '<img src="' + data[i].media.m + '"width="500px" "height="330px">';
+				document.getElementById("fotos").innerHTML = html;
+				i++;
+				numPhotos++;
+				$("#photos").val(numPhotos);
+			}
+		});
+    }
 
 });

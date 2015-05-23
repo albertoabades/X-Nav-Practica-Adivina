@@ -18,3 +18,8 @@ input{
 	background-color: #808080;
 	border: solid 0px;
 }
+
+#fotos{
+	height: 300px;
+	width: 500px;
+}
