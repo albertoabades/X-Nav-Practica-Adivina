@@ -1,6 +1,7 @@
 var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 var map;
 var placecoords;
+var coords;
 var myVar;
 var numPhotos;
 var dist;
@@ -8,6 +9,12 @@ var puntuacion;
 var juego;
 var nivel;
 var marcado = 0;
+var marker1;
+var marker2;
+var estadoActual;
+var nestados;
+var i;
+var data;
 
 
 $(document).ready(function(){ 
@@ -17,6 +24,8 @@ $(document).ready(function(){
 	$("#distance").val("");
 	$("#photos").val("");
 	$("#points").val("");
+	$("#juegoelegido").val("");
+	$("#nivel").val("");
 
 	map = L.map('mapa').setView([40.2838, -3.8215], 2);
 	// add an OpenStreetMap tile layer
@@ -29,24 +38,24 @@ $(document).ready(function(){
 	function onMapClick(e) {
 		var marker = "";
 		var lat = e.latlng.toString();
-		var coords = lat.substring(6);
-		var marker1 = L.marker(e.latlng).addTo(map);
+		coords = lat.substring(6);
+		marker1 = L.marker(e.latlng).addTo(map);
 		$("#selectCoords").val(coords);
 		dist=e.latlng.distanceTo(L.latLng(placecoords[0], placecoords[1]))/1000;
 		$("#distance").val(dist.toFixed(3));
 		$("#correctCoords").val("("+placecoords+")");
 	    $("#name").val(placetag);
-	    var marker2 = L.marker(L.latLng(placecoords[0], placecoords[1])).addTo(map);
+	    marker2 = L.marker(L.latLng(placecoords[0], placecoords[1])).addTo(map);
 	    clearTimeout(myVar);
 	    calcularPuntuacion();
-	    //marcado = 1;
+	    marcado = 1;
 	}
 
 	function startGame(){
-		//if (marcado == 1){
-		//	map.removeLayer(marker1);
-		//	map.removeLayer(marker2);
-		//}	
+		if (marcado == 1){
+			map.removeLayer(marker1);
+			map.removeLayer(marker2);
+		}	
 		numPhotos = 0;
 		$.getJSON("juegos/"+juego, function(datos){
 			var place = datos.features[Math.floor(Math.random()*datos.features.length)];
@@ -58,7 +67,15 @@ $(document).ready(function(){
 	}
 
     $("#startGame").click(function(){
-        startGame();
+    	if (name != " " && nivel != " "){
+			$("#selectCoords").val("");
+			$("#correctCoords").val("");
+			$("#name").val("");
+			$("#distance").val("");
+			$("#photos").val("");
+			$("#points").val("");
+	        startGame();
+    	}
     });
 
     $("#stopGame").click(function(){
@@ -91,12 +108,12 @@ $(document).ready(function(){
     });
 
     $("#medio").click(function(){
-    	nivel = 2;
+    	nivel = 2/3;
     	$("#nivel").val("Medio");
     });
 
     $("#dificil").click(function(){
-    	nivel = 4;
+    	nivel = 2;
     	$("#nivel").val("Dificil");
     });
 
@@ -107,8 +124,8 @@ $(document).ready(function(){
 			tagmode:"any",
 			format:"json"
 		}).done(function(data){
-			data = data.items.splice(0,20);
-			myVar = setInterval(function () {myTimer()}, 1000);
+			data = data.items.splice(0,30);
+			myVar = setInterval(function () {myTimer()}, 1000/nivel);
 			function myTimer() {
 				document.getElementById("fotos").innerHTML = "";
 				html = '<img src="' + data[i].media.m + '"width="500px" "height="330px">';
