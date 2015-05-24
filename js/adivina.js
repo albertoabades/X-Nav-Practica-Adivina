@@ -5,6 +5,9 @@ var myVar;
 var numPhotos;
 var dist;
 var puntuacion;
+var juego;
+var nivel;
+var marcado = 0;
 
 
 $(document).ready(function(){ 
@@ -27,20 +30,25 @@ $(document).ready(function(){
 		var marker = "";
 		var lat = e.latlng.toString();
 		var coords = lat.substring(6);
-		var marker = L.marker(e.latlng).addTo(map);
+		var marker1 = L.marker(e.latlng).addTo(map);
 		$("#selectCoords").val(coords);
 		dist=e.latlng.distanceTo(L.latLng(placecoords[0], placecoords[1]))/1000;
 		$("#distance").val(dist.toFixed(3));
 		$("#correctCoords").val("("+placecoords+")");
 	    $("#name").val(placetag);
-	    var marker = L.marker(L.latLng(placecoords[0], placecoords[1])).addTo(map);
+	    var marker2 = L.marker(L.latLng(placecoords[0], placecoords[1])).addTo(map);
 	    clearTimeout(myVar);
 	    calcularPuntuacion();
+	    //marcado = 1;
 	}
 
 	function startGame(){
+		//if (marcado == 1){
+		//	map.removeLayer(marker1);
+		//	map.removeLayer(marker2);
+		//}	
 		numPhotos = 0;
-		$.getJSON("juegos/Capitales.json", function(datos){
+		$.getJSON("juegos/"+juego, function(datos){
 			var place = datos.features[Math.floor(Math.random()*datos.features.length)];
 	        placecoords=place.geometry.coordinates;
 	        placetag=place.properties.Name;
@@ -65,6 +73,31 @@ $(document).ready(function(){
 		$("#photos").val("");
     	clearTimeout(myVar);
     	document.getElementById("fotos").innerHTML = "";
+    });
+
+    $("#capitales").click(function(){
+    	juego = "Capitales.json";
+    	$("#juegoelegido").val("Capitales");
+    });
+
+    $("#paises").click(function(){
+    	juego = "Paises.json";
+    	$("#juegoelegido").val("Paises");
+    });
+
+    $("#facil").click(function(){
+    	nivel = 1;
+    	$("#nivel").val("Facil");
+    });
+
+    $("#medio").click(function(){
+    	nivel = 2;
+    	$("#nivel").val("Medio");
+    });
+
+    $("#dificil").click(function(){
+    	nivel = 4;
+    	$("#nivel").val("Dificil");
     });
 
     function showPics(placetag){

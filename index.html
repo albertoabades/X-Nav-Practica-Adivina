@@ -22,12 +22,45 @@
    					<p>
    						<button class="btn btn-success" type="button" id="abortGame">Abort</button>
    					</p>
+   					<p>
+	   					<div class="btn-group" role="group">
+		    				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		      					Juegos
+		     				<span class="caret"></span>
+		   					</button>
+	    				<ul class="dropdown-menu" role="menu">
+	      					<li><a id="capitales">Capitales</a></li>
+	      					<li><a id="paises">Paises</a></li>
+	   					</ul>
+	  					</div>
+  					</p>
+  					<p>
+	  					<div class="btn-group" role="group">
+		    				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		      					Nivel
+		     				<span class="caret"></span>
+		   					</button>
+	    				<ul class="dropdown-menu" role="menu">
+	      					<li><a id="facil">Facil</a></li>
+	      					<li><a id="medio">Medio</a></li>
+	      					<li><a id="dificil">Dificil</a></li>
+	   					</ul>
+	  					</div>
+  					</p>
 				</div>
 				<div class="col-md-6">
 					<div id="fotos">
 					</div>
 				</div>
 				<div class="col-md-3">
+					<form>
+						Juego:
+						<input type="text" id="juegoelegido" value="">
+					</form>
+					<form>
+						Nivel:
+						<input type="text" id="nivel" value="">
+					</form>					
 					<form>
 						Select coords:
 						<input type="text" id="selectCoords" value="">
