@@ -3,6 +3,9 @@ var map;
 var placecoords;
 var myVar;
 var numPhotos;
+var dist;
+var puntuacion;
+
 
 $(document).ready(function(){ 
 	$("#selectCoords").val("");
@@ -10,6 +13,7 @@ $(document).ready(function(){
 	$("#name").val("");
 	$("#distance").val("");
 	$("#photos").val("");
+	$("#points").val("");
 
 	map = L.map('mapa').setView([40.2838, -3.8215], 2);
 	// add an OpenStreetMap tile layer
@@ -25,14 +29,14 @@ $(document).ready(function(){
 		var coords = lat.substring(6);
 		var marker = L.marker(e.latlng).addTo(map);
 		$("#selectCoords").val(coords);
-		var dist=e.latlng.distanceTo(L.latLng(placecoords[0], placecoords[1]))/1000;
+		dist=e.latlng.distanceTo(L.latLng(placecoords[0], placecoords[1]))/1000;
 		$("#distance").val(dist.toFixed(3));
 		$("#correctCoords").val("("+placecoords+")");
 	    $("#name").val(placetag);
 	    var marker = L.marker(L.latLng(placecoords[0], placecoords[1])).addTo(map);
 	    clearTimeout(myVar);
+	    calcularPuntuacion();
 	}
-	//map.on('click', onMapClick);
 
 	function startGame(){
 		numPhotos = 0;
@@ -81,6 +85,11 @@ $(document).ready(function(){
 				$("#photos").val(numPhotos);
 			}
 		});
+    }
+
+    function calcularPuntuacion(){
+    	var puntuacion = dist*numPhotos;
+    	$("#points").val(puntuacion.toFixed(3));
     }
 
 });
