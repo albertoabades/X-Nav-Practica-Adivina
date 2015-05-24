@@ -11,10 +11,6 @@ var nivel;
 var marcado = 0;
 var marker1;
 var marker2;
-var estadoActual;
-var nestados;
-var i;
-var data;
 
 
 $(document).ready(function(){ 
@@ -45,7 +41,7 @@ $(document).ready(function(){
 		$("#distance").val(dist.toFixed(3));
 		$("#correctCoords").val("("+placecoords+")");
 	    $("#name").val(placetag);
-	    marker2 = L.marker(L.latLng(placecoords[0], placecoords[1])).addTo(map);
+	    marker2 = L.marker(L.latLng(placecoords[1], placecoords[0])).addTo(map);
 	    clearTimeout(myVar);
 	    calcularPuntuacion();
 	    marcado = 1;
@@ -104,17 +100,17 @@ $(document).ready(function(){
 
     $("#facil").click(function(){
     	nivel = 1;
-    	$("#nivel").val("Facil");
+    	$("#level").val("Facil");
     });
 
     $("#medio").click(function(){
     	nivel = 2/3;
-    	$("#nivel").val("Medio");
+    	$("#level").val("Medio");
     });
 
     $("#dificil").click(function(){
     	nivel = 2;
-    	$("#nivel").val("Dificil");
+    	$("#level").val("Dificil");
     });
 
     function showPics(placetag){

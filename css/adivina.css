@@ -1,11 +1,11 @@
 body{
-	background-color: orange;
+	background-color: blue;
 }
 
 #juego{
 	width: 1200px;
 	height: 350px;
-	background-color: #808080;
+	background-color: orange;
 	border: solid 5px;
 }
 
@@ -15,11 +15,43 @@ body{
 }
 
 input{
-	background-color: #808080;
+	background-color: orange;
 	border: solid 0px;
 }
 
 #fotos{
 	height: 300px;
 	width: 500px;
+}
+
+#startGame{
+	background-color: black;
+	color: white;
+}
+
+#stopGame{
+	background-color: black;
+	color: white;
+}
+
+#abortGame{
+	background-color: black;
+	color: white;
+}
+#startGame{
+	background-color: black;
+	color: white;
+}
+
+#games{
+	background-color: black;
+	color: white;
+}
+
+#nivel{
+	background-color: black;
+	color: white;
+}
+form, input{
+	font-size: 13pt;
 }
