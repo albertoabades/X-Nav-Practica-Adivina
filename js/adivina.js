@@ -11,7 +11,18 @@ var nivel;
 var marcado = 0;
 var marker1;
 var marker2;
+var currstate = 0;
+var state;
 
+	function goTo(State){
+
+		state= State - currstate;
+		if(state===0){
+			startGame();
+		}else{
+			history.go(state);
+		}
+	}
 
 $(document).ready(function(){ 
 	$("#selectCoords").val("");
@@ -45,6 +56,7 @@ $(document).ready(function(){
 	    clearTimeout(myVar);
 	    calcularPuntuacion();
 	    marcado = 1;
+	    saveHistory();
 	}
 
 	function startGame(){
@@ -104,12 +116,12 @@ $(document).ready(function(){
     });
 
     $("#medio").click(function(){
-    	nivel = 2/3;
+    	nivel = 2;
     	$("#level").val("Medio");
     });
 
     $("#dificil").click(function(){
-    	nivel = 2;
+    	nivel = 3;
     	$("#level").val("Dificil");
     });
 
@@ -124,7 +136,7 @@ $(document).ready(function(){
 			myVar = setInterval(function () {myTimer()}, 1000/nivel);
 			function myTimer() {
 				document.getElementById("fotos").innerHTML = "";
-				html = '<img src="' + data[i].media.m + '"width="500px" "height="330px">';
+				html = '<img src="' + data[i].media.m + '"width="500px" height="330px">';
 				document.getElementById("fotos").innerHTML = html;
 				i++;
 				numPhotos++;
@@ -137,5 +149,23 @@ $(document).ready(function(){
     	var puntuacion = dist*numPhotos;
     	$("#points").val(puntuacion.toFixed(3));
     }
+
+    function saveHistory(){
+		var stateObj={
+			name:juego,
+			date:new Date(),
+			difficulty:nivel
+		}
+		currstate++;
+		var html= '<a href="javascript:goTo('+state+')">'+juego+'Fecha:'+stateObj.date+'</a>'+'<br>';
+		$('#historial').append(html);
+		history.pushState(stateObj,'Adivina',location.href+juego+nivel);
+	}
+
+	window.addEventListener('popstate', function(event) {
+		nivel=event.state.difficulty;
+		juego=event.state.name;
+		startGame();
+	});
 
 });

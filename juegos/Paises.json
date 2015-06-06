@@ -1,0 +1,17 @@
+{
+	"type": "FeatureCollection",
+	"features": 
+	[
+        {
+			"geometry": {
+	            "type": "Point",
+	            "coordinates": [40.416775, -3.703790]
+			},
+			"type": "Feature",
+			"properties": {
+	            "Name": "España"
+			},
+			"id": 1
+        }
+	]
+}
