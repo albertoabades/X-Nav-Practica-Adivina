@@ -73,18 +73,6 @@ $(document).ready(function(){
     	$("#level").val("Dificil");
     });
 
-    function saveHistory(){
-		var stateObj={
-			name:juego,
-			date:new Date(),
-			difficulty:nivel
-		}
-		currstate++;
-		var html= '<a href="javascript:goTo('+state+')">'+juego+'Fecha:'+stateObj.date+'</a>'+'<br>';
-		$('#historial').append(html);
-		history.pushState(stateObj,'Adivina',location.href+juego+nivel);
-	}
-
 	window.addEventListener('popstate', function(event) {
 		nivel=event.state.difficulty;
 		juego=event.state.name;
@@ -150,4 +138,25 @@ function onMapClick(e) {
 	calcularPuntuacion();
 	marcado = 1;
 	saveHistory();
+}
+
+function saveHistory(){
+	var stateObj={
+		name:juego,
+		date:new Date(),
+		difficulty:nivel
+	}
+	currstate++;
+	var html= '<a href="javascript:goTo('+state+')">'+juego+'Fecha:'+stateObj.date+'</a>'+'<br>';
+	$('#historial').append(html);
+	history.pushState(stateObj,'Adivina',location.href+juego+nivel);
+}
+
+function goTo(State){
+	state= State - currstate;
+	if(state===0){
+		startGame();
+	}else{
+		history.go(state);
+	}
 }
