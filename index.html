@@ -10,49 +10,52 @@
 		<title>Adivina dónde está</title>
 	</head>
 	<body>
+		<nav class="navbar navbar-default">
+		  	<div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    	<div class="navbar-header">
+		      		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		        		<span class="sr-only">Toggle navigation</span>
+		        		<span class="icon-bar"></span>
+		        		<span class="icon-bar"></span>
+		        		<span class="icon-bar"></span>
+		      		</button>
+		    	</div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      	<ul class="nav navbar-nav">
+			       		<li class="dropdown">
+			          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Juego<span class="caret"></span></a>
+			          		<ul class="dropdown-menu" role="menu">
+					    		<li><a id="capitales">Capitales</a></li>
+				      			<li><a id="paises">Paises</a></li>
+			         		</ul>
+			        	</li>
+			        	<li class="dropdown">
+			          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Nivel<span class="caret"></span></a>
+			          		<ul class="dropdown-menu" role="menu">
+				      			<li><a id="facil">Facil</a></li>
+				      			<li><a id="medio">Medio</a></li>
+				      			<li><a id="dificil">Dificil</a></li>
+			          		</ul>
+			        	</li>
+			      	</ul>
+			      	<ul class="nav navbar-nav navbar-right">
+						<p class="navbar-text"><strong><h4>Adivina donde está</h4></strong></p>		      
+					</ul>
+					<ul class="nav navbar-nav navbar-center">
+						<button class="btn btn-default navbar-btn" type="button" id="startGame"><strong>Comenzar</strong></button>
+						<button class="btn btn-default navbar-btn" type="button" id="stopGame"><strong>Detener</strong></button>
+						<button class="btn btn-default navbar-btn" type="button" id="abortGame"><strong>Abortar</strong></button>      
+					</ul>
+		    	</div><!-- /.navbar-collapse -->
+		  	</div><!-- /.container-fluid -->
+		</nav>
 		<div id="game" class="container">
 			<div class="row" id="juego">
-				<div class="col-md-3" id="zonaopciones">
-					<p>
-						<button class="btn btn-default" type="button" id="startGame">Start Game</button>
-					</p>
-					<p>
-   						<button class="btn btn-primary" type="button" id="stopGame">Stop</button>
-   					</p>
-   					<p>
-   						<button class="btn btn-success" type="button" id="abortGame">Abort</button>
-   					</p>
-   					<p>
-	   					<div class="btn-group" role="group">
-		    				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="games">
-		      					Juegos
-		     				<span class="caret"></span>
-		   					</button>
-	    				<ul class="dropdown-menu" role="menu">
-	      					<li><a id="capitales">Capitales</a></li>
-	      					<li><a id="paises">Paises</a></li>
-	   					</ul>
-	  					</div>
-  					</p>
-  					<p>
-	  					<div class="btn-group" role="group">
-		    				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="nivel">
-		      					Nivel
-		     				<span class="caret"></span>
-		   					</button>
-	    				<ul class="dropdown-menu" role="menu">
-	      					<li><a id="facil">Facil</a></li>
-	      					<li><a id="medio">Medio</a></li>
-	      					<li><a id="dificil">Dificil</a></li>
-	   					</ul>
-	  					</div>
-  					</p>
-				</div>
-				<div class="col-md-6" id="zonafotos">
-					<div id="fotos">
-					</div>
-				</div>
-				<div class="col-md-3" id="zonaresultado">
+				<div class="col-md-3" id="datos">
+					<p class="titulo">DATOS</p>
 					<form>
 						Juego:
 						<input type="text" id="juegoelegido" value="">
@@ -86,9 +89,15 @@
 						<input type="text" id="name" value="">
 					</form>
 				</div>
+				<div class="col-md-6" id="zonafotos">
+					<p class="titulo">FOTOS</p>
+					<div id="fotos"></div>
+				</div>
+				<div class="col-md-3" id="historial">
+					<p class="titulo">HISTORIAL</p>
+				</div>
 			</div>
 			<div class ="row" id="mapa"></div>
-			<div id="historial"></div>
 		</div>
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -136,7 +136,7 @@ $(document).ready(function(){
 			myVar = setInterval(function () {myTimer()}, 1000/nivel);
 			function myTimer() {
 				document.getElementById("fotos").innerHTML = "";
-				html = '<img src="' + data[i].media.m + '"width="500px" height="330px">';
+				html = '<img src="' + data[i].media.m + '"width="500px" height="280px">';
 				document.getElementById("fotos").innerHTML = html;
 				i++;
 				numPhotos++;

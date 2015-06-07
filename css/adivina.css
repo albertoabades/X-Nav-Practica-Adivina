@@ -1,12 +1,16 @@
 body{
-	background-color: blue;
+	background-color: white;
 }
 
 #juego{
 	width: 1200px;
 	height: 350px;
 	background-color: orange;
+}
+
+#datos, #zonafotos, #historial{
 	border: solid 5px;
+	height: 350px;
 }
 
 #mapa{
@@ -20,38 +24,55 @@ input{
 }
 
 #fotos{
-	height: 300px;
+	height: 350px;
 	width: 500px;
+	margin: 0 auto;
+}
+
+#startGame, #stopGame, #abortGame, #startGame, #games, #nivel{
+	height: 45px;
+	width: 120px;
+	font-size: 13pt;
 }
 
 #startGame{
-	background-color: black;
-	color: white;
+	background-color: #00FF00;
 }
 
 #stopGame{
-	background-color: black;
-	color: white;
+	background-color: red;
 }
 
 #abortGame{
-	background-color: black;
-	color: white;
-}
-#startGame{
-	background-color: black;
-	color: white;
+	background-color: #1E90FF;
 }
 
-#games{
-	background-color: black;
-	color: white;
-}
-
-#nivel{
-	background-color: black;
-	color: white;
-}
 form, input{
 	font-size: 13pt;
+}
+
+.titulo{
+	text-align: center;
+}
+
+#botones{
+	background-color: black;
+	color: white;
+	text-align: left;
+	font-size: 20pt;
+	width: 1200px;
+	padding-left: 10px;
+}
+
+.dropdown-toggle{
+	font-size: 15pt;
+}
+
+#capitales, #paises, #facil, #medio, #dificil{
+	font-size: 15pt;
+}
+
+.navbar{
+	background-color: white;
+	border: solid 0;
 }
