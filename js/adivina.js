@@ -12,6 +12,7 @@ var marcado = 0;
 var marker1;
 var marker2;
 var currstate = 0;
+var partidasjugadas = 0;
 var state;
 
 $(document).ready(function(){ 
@@ -84,6 +85,7 @@ $(document).ready(function(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function startGame(){
+	partidasjugadas++;
 	if (marcado == 1){
 		map.removeLayer(marker1);
 		map.removeLayer(marker2);
@@ -137,7 +139,8 @@ function onMapClick(e) {
 	clearTimeout(myVar);
 	calcularPuntuacion();
 	marcado = 1;
-	saveHistory();
+	if(partidasjugadas > currstate)
+		saveHistory();
 }
 
 function saveHistory(){
