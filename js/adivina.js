@@ -25,12 +25,13 @@ $(document).ready(function(){
 
     $("#startGame").click(function(){
     	if (name != " " && nivel != " "){
-			$("#selectCoords").val("");
-			$("#correctCoords").val("");
-			$("#name").val("");
-			$("#distance").val("");
-			$("#photos").val("");
-			$("#points").val("");
+			//$("#selectCoords").val("");
+			//$("#correctCoords").val("");
+			//$("#name").val("");
+			//$("#distance").val("");
+			//$("#photos").val("");
+			//$("#points").val("");
+			resetear();
 	        startGame();
     	}
     });
@@ -40,23 +41,24 @@ $(document).ready(function(){
     });
 
     $("#abortGame").click(function(){
-    	$("#selectCoords").val("");
-		$("#correctCoords").val("");
-		$("#name").val("");
-		$("#distance").val("");
-		$("#photos").val("");
+    	//$("#selectCoords").val("");
+		//$("#correctCoords").val("");
+		//$("#name").val("");
+		//$("#distance").val("");
+		//$("#photos").val("");
+		resetear();
     	clearTimeout(myVar);
     	document.getElementById("fotos").innerHTML = "";
     });
 
     $("#capitales").click(function(){
-    	juego = "Capitales.json";
-    	$("#juegoelegido").val("Capitales");
+    	juego = "Capitales";
+    	$("#juegoelegido").val(juego);
     });
 
     $("#paises").click(function(){
-    	juego = "Paises.json";
-    	$("#juegoelegido").val("Paises");
+    	juego = "Paises";
+    	$("#juegoelegido").val(juego);
     });
 
     $("#facil").click(function(){
@@ -77,6 +79,10 @@ $(document).ready(function(){
     window.onpopstate= function(event) {
        	nivel=event.state.difficulty;
 		juego=event.state.name;
+		$("#juegoelegido").val(juego);
+		if(nivel == 1){$("#level").val("Facil")};
+		if(nivel == 2){$("#level").val("Medio")};
+		if(nivel == 3){$("#level").val("Dificil")};
 		startGame();
     };
 
@@ -84,14 +90,24 @@ $(document).ready(function(){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function resetear(){
+	$("#selectCoords").val("");
+	$("#correctCoords").val("");
+	$("#name").val("");
+	$("#distance").val("");
+	$("#photos").val("");
+	$("#points").val("");
+}
+
 function startGame(){
+	resetear();
 	partidasjugadas++;
 	if (marcado == 1){
 		map.removeLayer(marker1);
 		map.removeLayer(marker2);
 	}	
 	numPhotos = 0;
-	$.getJSON("juegos/"+juego, function(datos){
+	$.getJSON("juegos/"+juego+".json", function(datos){
 		var place = datos.features[Math.floor(Math.random()*datos.features.length)];
        	placecoords=place.geometry.coordinates;
 	    placetag=place.properties.Name;
