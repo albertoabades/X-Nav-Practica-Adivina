@@ -29,7 +29,7 @@ input{
 	margin: 0 auto;
 }
 
-#startGame, #stopGame, #abortGame, #startGame, #games, #nivel{
+#startGame, #stopGame, #abortGame, #startGame, #games, #nivel, #continuar{
 	height: 45px;
 	width: 120px;
 	font-size: 13pt;

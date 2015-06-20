@@ -40,6 +40,10 @@ $(document).ready(function(){
     	clearTimeout(myVar);
     });
 
+    $("#continuar").click(function(){
+		showPics(placetag);
+    });
+
     $("#abortGame").click(function(){
     	//$("#selectCoords").val("");
 		//$("#correctCoords").val("");
@@ -107,6 +111,7 @@ function startGame(){
 		map.removeLayer(marker2);
 	}	
 	numPhotos = 0;
+	i=0;
 	$.getJSON("juegos/"+juego+".json", function(datos){
 		var place = datos.features[Math.floor(Math.random()*datos.features.length)];
        	placecoords=place.geometry.coordinates;
@@ -117,7 +122,6 @@ function startGame(){
 }
 
 function showPics(placetag){
-    i=0;
     $.getJSON(flickerAPI,{
 		tags:placetag,
 		tagmode:"any",
