@@ -14,10 +14,11 @@ var marker2;
 var currstate = 0;
 var partidasjugadas = 0;
 var state;
+var marcadores = [];
 
 $(document).ready(function(){ 
 
-	map = L.map('mapa').setView([40.2838, -3.8215], 2);
+	map = L.map('mapa').setView([0,0], 2);
 	// add an OpenStreetMap tile layer
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -25,12 +26,6 @@ $(document).ready(function(){
 
     $("#startGame").click(function(){
     	if (name != " " && nivel != " "){
-			//$("#selectCoords").val("");
-			//$("#correctCoords").val("");
-			//$("#name").val("");
-			//$("#distance").val("");
-			//$("#photos").val("");
-			//$("#points").val("");
 			resetear();
 	        startGame();
     	}
@@ -45,12 +40,10 @@ $(document).ready(function(){
     });
 
     $("#abortGame").click(function(){
-    	//$("#selectCoords").val("");
-		//$("#correctCoords").val("");
-		//$("#name").val("");
-		//$("#distance").val("");
-		//$("#photos").val("");
 		resetear();
+		$("#juegoelegido").val("");
+		$("#level").val("");
+		partidasjugadas--;
     	clearTimeout(myVar);
     	document.getElementById("fotos").innerHTML = "";
     });
@@ -87,6 +80,7 @@ $(document).ready(function(){
 		if(nivel == 1){$("#level").val("Facil")};
 		if(nivel == 2){$("#level").val("Medio")};
 		if(nivel == 3){$("#level").val("Dificil")};
+		borrarMarcadores();
 		startGame();
     };
 
@@ -105,6 +99,7 @@ function resetear(){
 
 function startGame(){
 	resetear();
+	borrarMarcadores();
 	partidasjugadas++;
 	if (marcado == 1){
 		map.removeLayer(marker1);
@@ -151,14 +146,15 @@ function onMapClick(e) {
 	coords = lat.substring(6);
 	marker1 = L.marker(e.latlng).addTo(map);
 	$("#selectCoords").val(coords);
-	dist=e.latlng.distanceTo(L.latLng(placecoords[0], placecoords[1]))/1000;
+	dist=e.latlng.distanceTo(L.latLng(placecoords[1], placecoords[0]))/1000;
 	$("#distance").val(dist.toFixed(3));
 	$("#correctCoords").val("("+placecoords+")");
 	$("#name").val(placetag);
 	marker2 = L.marker(L.latLng(placecoords[1], placecoords[0])).addTo(map);
+	marcadores.push(marker1);
+	marcadores.push(marker2);
 	clearTimeout(myVar);
 	calcularPuntuacion();
-	marcado = 1;
 	if(partidasjugadas > currstate)
 		saveHistory();
 }
@@ -183,4 +179,12 @@ function goTo(State){
 	}else{
 		history.go(state);
 	}
+}
+
+function borrarMarcadores(){
+    $.each (marcadores, function(i, marker){
+        map.removeLayer(marker)        
+    });
+    marcadores = []
+    map.setView([0, 0], 2);
 }

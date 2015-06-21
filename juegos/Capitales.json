@@ -5,7 +5,7 @@
         {
 			"geometry": {
 	            "type": "Point",
-	            "coordinates": [40.416775, -3.703790]
+	            "coordinates": [-3.703790,40.416775]
 			},
 			"type": "Feature",
 			"properties": {
@@ -27,24 +27,13 @@
         {
 			"geometry": {
 	            "type": "Point",
-	            "coordinates": [58.371944, 34.608333]
+	            "coordinates": [-58.371944, -34.608333]
 			},
 			"type": "Feature",
 			"properties": {
 	            "Name": "Buenos Aires"
 			},
 			"id": 3
-        },
-        {
-			"geometry": {
-	            "type": "Point",
-	            "coordinates": [139.715,35.700556]
-			},
-			"type": "Feature",
-			"properties": {
-	            "Name": "Tokyo"
-			},
-			"id": 4
         }
 	]
 }
