@@ -9,4 +9,4 @@ La práctica consiste en la creación de una aplicación HTML5 que permita jugar
 Detalles del enunciado en el programa de la asignatura.
 
 login de laboratorio: aabades
-url: https://vimeo.com/128736678
+url_parte_basica: https://vimeo.com/131358734
